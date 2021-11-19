@@ -165,7 +165,7 @@ bool zmk_hid_keyboard_is_pressed(zmk_key_t code) {
     if (code >= HID_USAGE_KEY_KEYBOARD_LEFTCONTROL && code <= HID_USAGE_KEY_KEYBOARD_RIGHT_GUI) {
         return zmk_hid_mod_is_pressed(code - HID_USAGE_KEY_KEYBOARD_LEFTCONTROL);
     }
-    for (int idx = 0; idx < ZMK_HID_KEYBOARD_NKRO_SIZE; idx++) {
+    for (int idx = 0; idx < CONFIG_ZMK_HID_CONSUMER_REPORT_SIZE; idx++) {
         if (keyboard_report.body.keys[idx] == code) {
             return true;
         }
@@ -188,7 +188,7 @@ int zmk_hid_consumer_release(zmk_key_t code) {
 void zmk_hid_consumer_clear() { memset(&consumer_report.body, 0, sizeof(consumer_report.body)); }
 
 bool zmk_hid_consumer_is_pressed(zmk_key_t key) {
-    for (int idx = 0; idx < ZMK_HID_CONSUMER_NKRO_SIZE; idx++) {
+    for (int idx = 0; idx < CONFIG_ZMK_HID_CONSUMER_REPORT_SIZE; idx++) {
         if (consumer_report.body.keys[idx] == key) {
             return true;
         }
